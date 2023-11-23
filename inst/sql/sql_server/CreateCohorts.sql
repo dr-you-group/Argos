@@ -36,6 +36,7 @@ SELECT ROW_NUMBER() OVER (ORDER BY subject_id, cohort_start_date) AS row_id,
 	cohort_definition_id,
 }
 	cohort_start_date, cohort_end_date,
+	observation_period_start_date AS observation_period_start_date,
 	DATEDIFF(DAY, observation_period_start_date, cohort_start_date) AS days_from_obs_start,
 	{@study_end_date != '' } ? { 
 	    CASE 
@@ -47,6 +48,7 @@ SELECT ROW_NUMBER() OVER (ORDER BY subject_id, cohort_start_date) AS row_id,
 	} : {
 		DATEDIFF(DAY, cohort_start_date, cohort_end_date)
 	} AS days_to_cohort_end,
+	observation_period_end_date,
 	{@study_end_date != '' } ? { 
 	    CASE 
 			WHEN observation_period_end_date <= CAST('@study_end_date' AS DATE)
