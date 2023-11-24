@@ -16,9 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#' @importFrom dplyr "%>%"
-#' @importFrom rlang .data
-
 #' create the study population settings
 #'
 #' @details
@@ -44,7 +41,10 @@
 #' @param restrictTarToCohortEnd If using a survival model and you want the time-at-risk to end at the cohort end date set this to T
 #' @return
 #' A list containing all the settings required for creating the study population
+#' @importFrom dplyr "%>%"
+#' @importFrom rlang .data
 #' @export
+
 createStudyPopulationSettings <- function(
         binary = T,
         includeAllOutcomes = T,
