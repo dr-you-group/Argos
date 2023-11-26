@@ -1,0 +1,87 @@
+DBMS:
+sql server
+
+Error:
+com.microsoft.sqlserver.jdbc.SQLServerException: The connection is closed.
+
+SQL:
+SELECT ROW_NUMBER() OVER (ORDER BY subject_id, cohort_start_date) AS row_id,
+	subject_id,
+
+	cohort_definition_id,
+
+	cohort_start_date, cohort_end_date,
+	observation_period_start_date AS observation_period_start_date,
+	DATEDIFF(DAY, observation_period_start_date, cohort_start_date) AS days_from_obs_start,
+	 
+	    CASE 
+			WHEN cohort_end_date <= CAST('20131231' AS DATE)
+				THEN DATEDIFF(DAY, cohort_start_date, cohort_end_date) 
+			ELSE 
+				DATEDIFF(DAY, cohort_start_date, CAST('20131231' AS DATE))
+		END 
+	 AS days_to_cohort_end,
+	observation_period_end_date,
+	 
+	    CASE 
+			WHEN observation_period_end_date <= CAST('20131231' AS DATE)
+				THEN DATEDIFF(DAY, cohort_start_date, observation_period_end_date) 
+			ELSE 
+				DATEDIFF(DAY, cohort_start_date, CAST('20131231' AS DATE))
+		END 
+	 AS days_to_obs_end,
+	year_of_birth as birth_year,
+	gender_concept_id as gender
+INTO #cohort_person
+
+ 
+
+
+
+FROM ( -- raw_cohorts 
+	SELECT subject_id,
+			   390 AS cohort_definition_id,
+		     cohort_start_date,
+		     cohort_end_date
+	FROM YUHS_SC.results_v282.cohort cohort_table
+	
+
+	WHERE cohort_definition_id IN (390)
+
+	) raw_cohorts
+
+INNER JOIN YUHS_SC.dbo.observation_period as op
+	ON subject_id = op.person_id
+
+INNER JOIN YUHS_SC.dbo.person as p
+ ON op.person_id = p.person_id
+	
+WHERE cohort_start_date <= op.observation_period_end_date
+	AND cohort_start_date >= op.observation_period_start_date
+AND cohort_start_date >= CAST('20020101' AS DATE)  
+AND cohort_start_date < CAST('20131231' AS DATE) 
+
+
+ 
+
+
+R version:
+R version 4.2.1 (2022-06-23)
+
+Platform:
+x86_64-pc-linux-gnu
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- dplyr (1.0.10)
+- checkmate (2.1.0)
+- Argos (0.0.0.9000)
+- DatabaseConnector (3.0.0)

@@ -63,64 +63,64 @@ createStudyPopulationSettings <- function(
         newCohortStartDate = NULL
 ){
     
-    checkIsClass(binary, "logical")
+    checkClass(binary, "logical")
     checkNotNull(binary)
     
-    checkIsClass(includeAllOutcomes, "logical")
+    checkClass(includeAllOutcomes, "logical")
     checkNotNull(includeAllOutcomes)
     
-    checkIsClass(firstExposureOnly, "logical")
+    checkClass(firstExposureOnly, "logical")
     checkNotNull(firstExposureOnly)
     
-    checkIsClass(washoutPeriod, c("numeric", "integer"))
+    checkClass(washoutPeriod, c("numeric", "integer"))
     checkNotNull(washoutPeriod)
     checkHigherEqual(washoutPeriod, 0)
     
-    checkIsClass(removeSubjectsWithPriorOutcome, "logical")
+    checkClass(removeSubjectsWithPriorOutcome, "logical")
     checkNotNull(removeSubjectsWithPriorOutcome)
     
-    checkIsClass(priorOutcomeLookback, c("numeric", "integer"))
+    checkClass(priorOutcomeLookback, c("numeric", "integer"))
     checkNotNull(priorOutcomeLookback)
     checkHigherEqual(priorOutcomeLookback, 0)
     
-    checkIsClass(requireTimeAtRisk, "logical")
+    checkClass(requireTimeAtRisk, "logical")
     checkNotNull(requireTimeAtRisk)
     
     if(requireTimeAtRisk){
-        checkIsClass(minTimeAtRisk, c("numeric", "integer"))
+        checkClass(minTimeAtRisk, c("numeric", "integer"))
         checkNotNull(minTimeAtRisk)
         checkHigherEqual(minTimeAtRisk, 0)
     }
     
-    checkIsClass(riskWindowStart, c("numeric", "integer", "character"))
+    checkClass(riskWindowStart, c("numeric", "integer", "character"))
     checkNotNull(riskWindowStart)
     
-    checkIsClass(startAnchor, c("character"))
+    checkClass(startAnchor, c("character"))
     checkNotNull(startAnchor)
     if(!startAnchor%in%c('cohort start', 'cohort end', "exact date")){
         stop('Incorrect startAnchor')
     }
     
-    checkIsClass(riskWindowEnd, c("numeric", "integer", "character"))
+    checkClass(riskWindowEnd, c("numeric", "integer", "character"))
     checkNotNull(riskWindowEnd)
     
-    checkIsClass(endAnchor, c("character"))
+    checkClass(endAnchor, c("character"))
     checkNotNull(endAnchor)
     if(!endAnchor%in%c('cohort start', 'cohort end', "exact date")){
         stop('Incorrect endAnchor')
     }
     
-    checkIsClass(changeCohortStartDate, "logical")
+    checkClass(changeCohortStartDate, "logical")
     checkNotNull(changeCohortStartDate)
     
     # if(startAnchor == endAnchor){
     #     checkHigherEqual(riskWindowEnd, riskWindowStart)
     # }
     
-    checkIsClass(restrictTarToCohortEnd, "logical")
+    checkClass(restrictTarToCohortEnd, "logical")
     checkNotNull(restrictTarToCohortEnd)
     
-    checkIsClass(newCohortStartDate, "character")
+    checkClass(newCohortStartDate, "character")
     checkNotNull(newCohortStartDate)
     
     if(requireTimeAtRisk){
@@ -186,7 +186,7 @@ createStudyPopulation <- function(
         population = NULL
 ) {
     
-    checkIsClass(populationSettings, 'populationSettings')
+    checkClass(populationSettings, 'populationSettings')
     
     binary <- populationSettings$binary
     includeAllOutcomes <- populationSettings$includeAllOutcomes
