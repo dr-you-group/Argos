@@ -7,15 +7,15 @@ library(lubridate)
 library(stringr)
 
 ## Database settings for reading existing tables
-cdmDatabaseSchema <-"YUHS_SC.dbo"
-vocabularyDatabaseSchema  <- "YUHS_SC.dbo"
-# oracleTempSchema <- NULL
+cdmDatabaseSchema <- ""
+vocabularyDatabaseSchema  <- ""
+# oracleTempSchema <- ""
 
 # Database settings for writing new tables
-cohortDatabaseSchema <- "cohortdb.yeonjaehan" 
-outcomeDatabaseSchema <- "cohortdb.yeonjaehan"
-## 제출 전 1129 지우기
-outcomeTable <- "argos_cohort_1129"
+cohortDatabaseSchema <- ""
+outcomeDatabaseSchema <- ""
+
+outcomeTable <- ""
 
 ## Outcome folder settings
 outputFolder <- "/home/rstudio/result"
@@ -23,10 +23,10 @@ options(fftempdir = "D:/FFtemp")
 
 ## Connection settings
 pathToDriver <- "/home/rstudio/jdbc"
-connectionDetails<-DatabaseConnector::createConnectionDetails(dbms = 'sql server',
-                                                              server = "10.19.10.241",
-                                                              user = "stacyhan23",
-                                                              password = "abc@1234",
+connectionDetails<-DatabaseConnector::createConnectionDetails(dbms = "",
+                                                              server = "",
+                                                              user = "",
+                                                              password = "",
                                                               pathToDriver = pathToDriver)
 
 
