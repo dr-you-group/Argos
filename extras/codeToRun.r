@@ -52,6 +52,11 @@ outcomeCohortList <- data.frame(outcomeCohortId <- c(1,2,3,4,5,6,7,8,9,10,11,12,
 dbStartDate <- lubridate::ymd("20180101")
 dbEndDate <- lubridate::ymd("20220401")
 
+outputFolder <- outputFolder
+if (!file.exists(outputFolder)){
+    dir.create(outputFolder)
+}
+
 ParallelLogger::addDefaultFileLogger(file.path(outputFolder, "log.txt")) 
 
 #Connection
