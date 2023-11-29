@@ -448,11 +448,12 @@ createStudyPopulation <- function(
             dplyr::mutate(outcomeCount = ifelse(is.na(.data$ocount),0,.data$ocount))
     }
     
+    # outcomeId 추가하는 것으로 변경함
     population <- population %>%
         dplyr::mutate(timeAtRisk = .data$tarEnd - .data$tarStart + 1 ,
                       survivalTime = ifelse(.data$outcomeCount == 0, .data$tarEnd -.data$tarStart + 1, .data$first - .data$tarStart + 1),
-                      daysToEvent = .data$first) %>%
-        dplyr::select("rowId", "subjectId", "targetId", "cohortStartDate", "daysFromObsStart",
+                      daysToEvent = .data$first, outcomeId = outcomeId) %>%
+        dplyr::select("rowId", "subjectId", "targetId", "outcomeId" ,"cohortStartDate", "daysFromObsStart",
                       "daysToCohortEnd", "daysToObsEnd", #"ageYear", 
                       "gender",
                       "outcomeCount", "timeAtRisk", "daysToEvent", "survivalTime")
